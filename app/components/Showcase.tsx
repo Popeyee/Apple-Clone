@@ -1,13 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+// Register plugin at module level (outside component)
+gsap.registerPlugin(ScrollTrigger);
+
 const Showcase = () => {
-  gsap.registerPlugin(ScrollTrigger);
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
 
   useGSAP(() => {
@@ -23,7 +25,7 @@ const Showcase = () => {
       });
 
       timeline
-        .to(".mask img", {
+        .to(".mask-image", {
           transform: "scale(1.1)",
         })
         .to(".content", { opacity: 1, y: 0, ease: "power1.in" });
@@ -35,7 +37,14 @@ const Showcase = () => {
       <div className="media">
         <video src="/videos/game.mp4" loop muted autoPlay playsInline />
         <div className="mask">
-          <img src="/mask-logo.svg" alt="mask-logo" />
+          <Image
+            src="/mask-logo.svg"
+            alt="mask-logo"
+            fill
+            className="mask-image object-cover"
+            priority
+            unoptimized
+          />
         </div>
       </div>
 
@@ -54,8 +63,8 @@ const Showcase = () => {
               </p>
               <p>
                 It drives Apple Intelligence on iPad Pro, so you can write,
-                create, and accomplish more with ease. All in a design that’s
-                unbelievably thin, light, and powerful.
+                create, and accomplish more with ease. All in a design
+                that&apos;s unbelievably thin, light, and powerful.
               </p>
               <p>
                 A brand-new display engine delivers breathtaking precision,
@@ -86,4 +95,5 @@ const Showcase = () => {
     </section>
   );
 };
+
 export default Showcase;
