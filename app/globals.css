@@ -191,15 +191,20 @@ body {
       }
 
       .mask {
-        @apply absolute h-full top-0 lg:-top-20 xl:top-0;
+        @apply absolute h-full w-full top-0 lg:-top-20 xl:top-0;
 
-        img {
-          @apply h-full scale-150 lg:scale-100;
-          transform: matrix(80, 0, 0, 80, 0, 0);
+        .mask-image {
+          transform: matrix(80, 0, 0, 80, 0, 0) scale(1.5);
+        }
+
+        @media (min-width: 1024px) {
+          .mask-image {
+            transform: matrix(80, 0, 0, 80, 0, 0) scale(1);
+          }
         }
 
         @media (max-width: 1024px) {
-          img {
+          .mask-image {
             transform: matrix(1, 0, 0, 1, 0, 0);
           }
         }
